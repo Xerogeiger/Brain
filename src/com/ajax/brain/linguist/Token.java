@@ -6,8 +6,8 @@ import java.util.Objects;
  * The lexer produces tokens
  */
 public class Token {
-    public TokenType type;
-    public String value;
+    public final TokenType type;
+    public final String value;
 
     /**
      * Creates a token with the given type and value

@@ -3,7 +3,6 @@ package tests;
 import com.ajax.brain.linguist.Matcher;
 import com.ajax.brain.linguist.MatcherList;
 import com.ajax.brain.linguist.TokenType;
-import com.ajax.brain.utils.CollectionUtils;
 import org.junit.Test;
 
 import java.util.*;
@@ -212,7 +211,7 @@ public class MatcherListTest {
             matchers.addAll(matcherList);
             matchers.removeAll(matcherList);
 
-            assertTrue(matchers.size() == testMatchers.length);
+            assertEquals(testMatchers.length, matchers.size());
         }
     }
 
@@ -228,7 +227,7 @@ public class MatcherListTest {
 
         matchers.retainAll(m);
 
-        assertTrue(m.size() == 2);
+        assertEquals(2, m.size());
     }
 
     @Test

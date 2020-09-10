@@ -14,7 +14,9 @@ package com.ajax.brain.linguist;
  *
  * Other tokens include
  * OPERATOR this one is for is the lexer can handler operators like '+' and '*'
+ * WHITESPACE probably not going to be used but it is there
  */
 public enum TokenType {
-    OPERATOR, LIST_SEPARATOR, WORD, PUNCTUATION, SUMMARY_SEPARATOR, COORDINATING_CONJUNCTION, CORRELATIVE_CONJUNCTION, CLAUSE_SEPARATOR, HYPHEN
+    OPERATOR, LIST_SEPARATOR, WORD, PUNCTUATION, SUMMARY_SEPARATOR, COORDINATING_CONJUNCTION, CORRELATIVE_CONJUNCTION, CLAUSE_SEPARATOR, HYPHEN, WHITESPACE,
+    TEST //Signifies a test token
 }

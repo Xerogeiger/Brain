@@ -2,7 +2,6 @@ package com.ajax.brain.linguist;
 
 import com.ajax.brain.utils.UnsortedArrayException;
 import com.ajax.brain.utils.sorts.QuickSort;
-import com.ajax.brain.utils.sorts.Representor;
 
 import java.util.*;
 
@@ -76,9 +75,7 @@ public class MatcherList implements List<Matcher> {
     public MatcherList(int padding, Matcher... matchers) {
         this.matchers = new Matcher[matchers.length + padding];
 
-        for(int x = 0; x < matchers.length; x++) {
-            this.matchers[x] = matchers[x];
-        }
+        System.arraycopy(matchers, 0, this.matchers, 0, matchers.length);
 
         organize();
         countNonNulls();
@@ -146,7 +143,7 @@ public class MatcherList implements List<Matcher> {
      * Shifts all the elements in the array by an amount
      * If a shift is negative, after an element at the end is shifted the new value will be null
      *
-     * WARNING if the shift is negative all elements at offset+shift to offset will be overrided
+     * WARNING if the shift is negative all elements at offset+shift to offset will be overridden
      *
      * @param offset the offset to start shifting at
      * @param shift the amount to shift
@@ -370,6 +367,32 @@ public class MatcherList implements List<Matcher> {
     }
 
     /**
+     * Adds all of the {@code Matcher}s to the matcher list
+     *
+     * @param matchers the {@code Matcher}s to add
+     * @return {@code true} if the list was changed
+     */
+    public boolean addAll(Matcher... matchers) {
+        if(matchers.length+availableMatchers > matchers.length) {
+            increaseSize(matchers.length);
+        }
+
+        int b4 = availableMatchers;
+
+        for(Matcher o: matchers) {
+            if(o != null)
+                add1(o);
+        }
+
+        if(b4 != availableMatchers) {
+            listMods++;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -543,7 +566,7 @@ public class MatcherList implements List<Matcher> {
         /**
          * The offset of the iterator
          */
-        protected int offset;
+        protected final int offset;
 
         /**
          * The last index from {@link #next()} or {@link MatcherListIterator#previous()}
