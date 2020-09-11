@@ -10,8 +10,8 @@ package com.ajax.brain.utils.sorts;
  */
 public final class QuickSort<T> extends Sort<T>{
     /**
-     * Creates a new QuickSort object with the representor
-     * @param representor the representor for the objects
+     * Creates a new {@code QuickSort} object with the {@code Representor}
+     * @param representor the {@code Representor} for the objects
      * @throws NullPointerException if the representor is null
      */
     private QuickSort(Representor<T> representor) {
@@ -71,7 +71,8 @@ public final class QuickSort<T> extends Sort<T>{
     }
 
     /**
-     * Sorts the given array using a quicksort
+     * Sorts the given array using a QuickSort
+     *
      * @param arr the array to sort
      * @throws NullPointerException if the array is null
      */
@@ -85,9 +86,9 @@ public final class QuickSort<T> extends Sort<T>{
     }
 
     /**
-     * Sorts the provided array by constructing a new {@code QuickSort} Object then using it
+     * Sorts the provided array by constructing a new {@code QuickSort} object then using it
      * @param arr the array to sort
-     * @param representor the representor the the provided object type
+     * @param representor the {@code Representor} for the provided object type
      * @param <T> the object type of the array
      */
     public static <T> void sort(T[] arr, Representor<T> representor) {
@@ -95,8 +96,8 @@ public final class QuickSort<T> extends Sort<T>{
     }
 
     /**
-     * Returns a new {@code QuickSort} Object to be used multiple times
-     * @param representor the representor the the provided object type
+     * Returns a new {@code QuickSort} object to be used multiple times
+     * @param representor the {@code Representor} for the provided object type
      * @param <T> the object type of the array
      */
     public static <T> QuickSort<T> getInstance(Representor<T> representor) {

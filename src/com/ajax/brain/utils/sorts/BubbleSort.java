@@ -9,9 +9,9 @@ package com.ajax.brain.utils.sorts;
  */
 public final class BubbleSort<T> extends Sort<T>{
     /**
-     * Creates a new sort with the representor
+     * Creates a new {@code BubbleSort} with the {@code Representor}
      *
-     * @param representor the representor for converting objects to integers\
+     * @param representor the {@code Representor} for converting objects to integers
      * @throws NullPointerException if the representor is null
      */
     private BubbleSort(Representor<T> representor) {
@@ -20,6 +20,7 @@ public final class BubbleSort<T> extends Sort<T>{
 
     /**
      * Sorts the provided array with a BubbleSort
+     *
      * @param arr the array to sort
      */
     @Override
@@ -38,9 +39,10 @@ public final class BubbleSort<T> extends Sort<T>{
     }
 
     /**
-     * Sorts the provided array by constructing a new {@code BubbleSort} Object then using it
+     * Sorts the provided array by constructing a new {@code BubbleSort} object then using it
+     *
      * @param arr the array to sort
-     * @param representor the representor the the provided object type
+     * @param representor the {@code Representor} the the provided object type
      * @param <T> the object type of the array
      */
     public static <T> void sort(T[] arr, Representor<T> representor) {
@@ -48,8 +50,9 @@ public final class BubbleSort<T> extends Sort<T>{
     }
 
     /**
-     * Returns a new {@code BubbleSort} Object to be used multiple times
-     * @param representor the representor the the provided object type
+     * Returns a new {@code BubbleSort} object to be used multiple times
+     *
+     * @param representor the {@code Representor} for the provided object type
      * @param <T> the object type of the array
      */
     public static <T> BubbleSort<T> getInstance(Representor<T> representor) {

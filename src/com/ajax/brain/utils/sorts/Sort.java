@@ -4,8 +4,9 @@ public abstract class Sort<T> {
     protected final Representor<T> representor;
 
     /**
-     * Creates a new sort with the representor
-     * @param representor the representor for converting objects to integers\
+     * Creates a new {@code Sort} with the {@code Representor}
+     *
+     * @param representor the {@code Representor} for converting objects to integers
      * @throws NullPointerException if the representor is null
      */
     protected Sort(Representor<T> representor) {
@@ -18,13 +19,16 @@ public abstract class Sort<T> {
 
     /**
      * Sorts the provided array
+     * Sometimes this is just an accessor for Sorts that use recursion
+     *
      * @param arr the array to sort
      */
     public abstract void sort(T[] arr);
 
     /**
-     * Returns the sored representor
-     * @return the representor of the sort
+     * Returns the sored {@code Representor}
+     *
+     * @return the {@code Representor} of the sort
      */
     public Representor<T> getRepresentor() {
         return representor;
