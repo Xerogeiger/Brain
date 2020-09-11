@@ -280,10 +280,10 @@ public class MatcherList implements List<Matcher> {
     }
 
     /**
-     * Don't use this method use getMatchers this one will throw an exception if you try to use it
+     * Don't use this method use {@link #getMatchers()} this one will throw an exception if you try to use it
      * @return nothing
      * @throws UnsupportedOperationException this is not a supported method
-     *
+     * @deprecated This is unnecessary when I know the arrays type use {@link #getMatchers()} instead
      * @see #getMatchers()
      */
     @Deprecated
