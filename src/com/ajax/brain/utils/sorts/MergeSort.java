@@ -1,5 +1,7 @@
 package com.ajax.brain.utils.sorts;
 
+import com.ajax.brain.utils.Generics;
+
 import java.lang.reflect.Array;
 
 /**
@@ -12,9 +14,9 @@ import java.lang.reflect.Array;
  */
 public final class MergeSort<T> extends Sort<T>{
     /**
-     * Creates a new MergeSort with the representor
+     * Creates a new {@code MergeSort} with the {@code Representor}
      *
-     * @param representor the representor for converting objects to integers\
+     * @param representor the {@code Representor} for converting objects to integers
      * @throws NullPointerException if the representor is null
      */
     private MergeSort(Representor<T> representor) {
@@ -22,7 +24,8 @@ public final class MergeSort<T> extends Sort<T>{
     }
 
     /**
-     * Sorts the provided array with a merge sort
+     * Sorts the provided array with a MergeSort
+     *
      * @param arr the array to sort
      */
     @Override
@@ -31,7 +34,7 @@ public final class MergeSort<T> extends Sort<T>{
     }
 
     /**
-     * Separates the array, sorts it, then merges them
+     * Separates the array, sorts it, then merges it
      *
      * @param arr the array to sort
      * @param l the left index
@@ -44,8 +47,8 @@ public final class MergeSort<T> extends Sort<T>{
         int n2 = r - m;
 
         /* Create temp arrays */
-        T[] L = newArr(arr, n1);
-        T[] R= newArr(arr, n2);
+        T[] L = Generics.newGenericArray(arr, n1);
+        T[] R = Generics.newGenericArray(arr, n2);
 
         /*Copy data to temp arrays*/
         if (n1 >= 0) System.arraycopy(arr, l, L, 0, n1);
@@ -87,19 +90,8 @@ public final class MergeSort<T> extends Sort<T>{
     }
 
     /**
-     * Creates new array based on the provided one
-     * @param arr the base array
-     * @param length the length of the new one
-     * @param <T> the type of the array
-     * @return the new array
-     */
-    @SuppressWarnings("unchecked")
-    private static <T> T[] newArr(T[] arr, int length) {
-        return (T[]) Array.newInstance(arr.getClass().getComponentType(), length);
-    }
-
-    /**
      * Sorts the provided array from left to right
+     *
      * @param arr the array to sort
      * @param l the left index
      * @param r the right index
@@ -119,9 +111,10 @@ public final class MergeSort<T> extends Sort<T>{
     }
 
     /**
-     * Sorts the provided array by constructing a new {@code MergeSort} Object then using it
+     * Sorts the provided array by constructing a new {@code MergeSort} object then using it
+     *
      * @param arr the array to sort
-     * @param representor the representor the the provided object type
+     * @param representor the representor for the provided object type
      * @param <T> the object type of the array
      */
     public static <T> void sort(T[] arr, Representor<T> representor) {
@@ -129,8 +122,9 @@ public final class MergeSort<T> extends Sort<T>{
     }
 
     /**
-     * Returns a new {@code MergeSort} Object to be used multiple times
-     * @param representor the representor the the provided object type
+     * Returns a new {@code MergeSort} object to be used multiple times
+     *
+     * @param representor the {@code Representor} for the provided object type
      * @param <T> the object type of the array
      */
     public static <T> MergeSort<T> getInstance(Representor<T> representor) {
