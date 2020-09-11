@@ -32,29 +32,12 @@ public class SortsTest {
         timeFullArraySort(QuickSort::getInstance);
         timeFullArraySort(MergeSort::getInstance);
         timeFullArraySort(BubbleSort::getInstance);
+        timeFullArraySort(InsertionSort::getInstance);
 
         timeSingleArraySort(QuickSort::getInstance);
         timeSingleArraySort(MergeSort::getInstance);
         timeSingleArraySort(BubbleSort::getInstance);
-
-        /*Integer[] semiSorted = ints.clone();
-
-        QuickSort.sort(semiSorted, Integer::intValue);
-
-        Integer temp = semiSorted[0];
-        semiSorted[0] = semiSorted[semiSorted.length-1];
-        semiSorted[semiSorted.length-1] = temp;
-
-        int iterations = 10;
-
-        long totalTime1 = 0;
-
-        for(int i = 0; i < iterations; i++) {
-            Integer[] semiTemp = semiSorted.clone();
-            long b4 = System.currentTimeMillis();
-            QuickSort.sort(semiTemp, Integer::intValue);
-
-        }*/
+        timeSingleArraySort(InsertionSort::getInstance);
     }
 
     public static void timeFullArraySort(Function<Representor<Integer>, Sort<Integer>> makeSort) {
