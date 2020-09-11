@@ -1,5 +1,7 @@
 package com.ajax.brain.utils.sorts;
 
+import java.util.Comparator;
+
 /**
  * Represents an object as a {@code Integer}
  *
@@ -13,4 +15,14 @@ public interface Representor<T> {
      * @return the integer representing it
      */
     int convert(T obj);
+
+    /**
+     * Creates a {@code Comparator} from the {@code Representor}
+     *
+     * @param representor the {@code Representor}
+     * @return the new comparator
+     */
+    static <T> Comparator<T> toComparator(Representor<T> representor) {
+        return Comparator.comparingInt(representor::convert);
+    }
 }
