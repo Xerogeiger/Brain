@@ -85,7 +85,7 @@ public final class QuickSort<T> extends Sort<T>{
     }
 
     /**
-     * Sorts the provided array by constructing a new QuickSort Object then using it
+     * Sorts the provided array by constructing a new {@code QuickSort} Object then using it
      * @param arr the array to sort
      * @param representor the representor the the provided object type
      * @param <T> the object type of the array
@@ -95,7 +95,7 @@ public final class QuickSort<T> extends Sort<T>{
     }
 
     /**
-     * Returns a new QuickSort Object to be used multiple times
+     * Returns a new {@code QuickSort} Object to be used multiple times
      * @param representor the representor the the provided object type
      * @param <T> the object type of the array
      */
