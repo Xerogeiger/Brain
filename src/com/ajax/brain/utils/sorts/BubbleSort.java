@@ -6,7 +6,6 @@ package com.ajax.brain.utils.sorts;
  * Code <del>stolen</del> borrowed from <a href="https://www.geeksforgeeks.org/">https://www.geeksforgeeks.org/</a>
  * The page it was borrowed form is <a href="https://www.geeksforgeeks.org/bubble-sort/">https://www.geeksforgeeks.org/bubble-sort/</a>
  *
- * MergeSorts should only be used if memory is not a problem
  */
 public final class BubbleSort<T> extends Sort<T>{
     /**
