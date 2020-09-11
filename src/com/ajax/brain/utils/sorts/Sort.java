@@ -8,7 +8,7 @@ public abstract class Sort<T> {
      * @param representor the representor for converting objects to integers\
      * @throws NullPointerException if the representor is null
      */
-    public Sort(Representor<T> representor) {
+    protected Sort(Representor<T> representor) {
         if(representor == null) {
             throw new NullPointerException("Representor must not be null");
         }
