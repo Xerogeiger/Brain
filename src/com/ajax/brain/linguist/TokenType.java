@@ -10,7 +10,7 @@ package com.ajax.brain.linguist;
  * CLAUSE_SEPARATOR - for semi-colons. eg. The store was full of all kinds of produce; The store also had meats and soups.
  * COORDINATING_CONJUNCTION - And, or, for, so, but, yet, nor. Some of theses words may not be used as conjunctions put that is for the parser to figure out
  * CORRELATIVE_CONJUNCTION - Either, neither. These are always CORRELATIVE_CONJUNCTIONS but "not only... but also", "both and" are more difficult to detect and are left for the parser
- * HYPHEN - This can be one word or number like one-hundred or bottom-left
+ * HYPHEN - This can be one word like bottom-left or number like one-hundred
  *
  * Other tokens include
  * OPERATOR this one is for is the lexer can handler operators like '+' and '*'
