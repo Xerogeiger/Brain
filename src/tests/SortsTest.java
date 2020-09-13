@@ -13,7 +13,7 @@ public class SortsTest {
     static final Integer[] semiSorted;
 
     static {
-        var x = ints.length + 1;
+        var x = Integer.MAX_VALUE;
         for (int i = 0; i < ints.length; i++) {
             ints[i] = ThreadLocalRandom.current().nextInt(x);
         }
@@ -33,11 +33,17 @@ public class SortsTest {
         timeFullArraySort(MergeSort::getInstance);
         timeFullArraySort(BubbleSort::getInstance);
         timeFullArraySort(InsertionSort::getInstance);
+        timeFullArraySort(RadixSort::getInstance);
+        timeFullArraySort(TreeSort::getInstance);
+
+        System.out.println();
 
         timeSingleArraySort(QuickSort::getInstance);
         timeSingleArraySort(MergeSort::getInstance);
         timeSingleArraySort(BubbleSort::getInstance);
         timeSingleArraySort(InsertionSort::getInstance);
+        timeSingleArraySort(RadixSort::getInstance);
+        timeSingleArraySort(TreeSort::getInstance);
     }
 
     public static void timeFullArraySort(Function<Representor<Integer>, Sort<Integer>> makeSort) {
@@ -55,21 +61,16 @@ public class SortsTest {
         Sort<Integer> sort = makeSort.apply(Integer::intValue);
         String sortName = sort.getClass().getSimpleName();
 
-        int iterations = 10;
-
         long totalTime = 0;
 
-        for(int i = 0; i < iterations; i++) {
-            Integer[] semiTemp = semiSorted.clone();
-            long b4 = System.currentTimeMillis();
-            sort.sort(semiTemp);
-            long af = System.currentTimeMillis();
+        Integer[] semiTemp = semiSorted.clone();
+        long b4 = System.currentTimeMillis();
+        sort.sort(semiTemp);
+        long af = System.currentTimeMillis();
 
-            totalTime += af-b4;
-
-            if(!checkIfSorted(Integer::intValue, semiTemp))
+        totalTime += af-b4;
+        if(!checkIfSorted(Integer::intValue, semiTemp))
                 throw new UnsortedArrayException("Array should be sorted");
-        }
 
         System.out.println("Single element sort, " + sortName + " time taken: " + totalTime);
     }
