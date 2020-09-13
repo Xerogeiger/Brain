@@ -20,7 +20,7 @@ public final class CollectionUtils {
      * @return A string of the collection
      */
     public static <T> String toString(Collection<T> collection, ToString<T> stringy) {
-        if ( collection== null)
+        if (collection == null)
             return "null";
 
         int iMax = collection.size() - 1;
