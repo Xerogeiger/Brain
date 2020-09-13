@@ -4,7 +4,7 @@ package com.ajax.brain.linguist;
  * Says if the string is a match
  */
 public abstract class Matcher {
-    private static final WhitespaceMatcher WHITESPACE_MATCHER_INSTANCE = new WhitespaceMatcher();
+    private static WhitespaceMatcher WHITESPACE_MATCHER_INSTANCE;
 
     /**
      * The priority of the match
@@ -96,6 +96,9 @@ public abstract class Matcher {
      * @return a whitespace character matcher
      */
     public static Matcher getWhitespaceMatcher() {
+        if(WHITESPACE_MATCHER_INSTANCE == null)
+            WHITESPACE_MATCHER_INSTANCE = new WhitespaceMatcher();
+
         return WHITESPACE_MATCHER_INSTANCE;
     }
 
@@ -121,6 +124,19 @@ public abstract class Matcher {
      */
     public static Matcher getCharacterMatcher(String s, int priority, TokenType type) {
         return new CharacterMatcher(s, priority, type);
+    }
+
+    /**
+     * Creates a new {@code MultiWordMatcher} from the provided values
+     *
+     * @param priority the priority of the {@code Matcher}
+     * @param type the type of token this {@code Matcher} finds
+     * @param ignoreCase whether of not this {@code Matcher} should ignore the case of words
+     * @param strings the {@code String}s this {@code Matcher} should match
+     * @return the new {@code MultiWordMatcher}
+     */
+    public static Matcher getMultiWordMatcher(int priority, TokenType type, boolean ignoreCase, String... strings) {
+        return new MultiWordMatcher(priority, strings, type, ignoreCase);
     }
 
     /**
@@ -163,8 +179,7 @@ public abstract class Matcher {
         @Override
         public boolean match(String text) {
             if(text.length() == 1) {
-                if(text.charAt(0) == this.match)
-                    return true;
+                return text.charAt(0) == this.match;
             }
             return false;
         }
@@ -225,6 +240,60 @@ public abstract class Matcher {
         @Override
         public boolean match(String text) {
             return match.equalsIgnoreCase(text);
+        }
+    }
+
+    /**
+     * A {@code Matcher} capable of matching multiple words against a value
+     */
+    private static class MultiWordMatcher extends Matcher{
+        /**
+         * The array of strings to match
+         */
+        private final String[] match;
+
+        /**
+         * If the matcher should ignore the case of the strings when matching
+         */
+        private final boolean ignoreCase;
+
+        /**
+         * Constructs a new {@code MultiWordMatcher} with the provided priority, strings to match, and token type
+         *
+         * @param priority the priority of this {@code Matcher}
+         * @param match the strings to match
+         * @param type the token type of this {@code Matcher}
+         * @param ignoreCase whether of not to ignore case of this na
+         */
+        public MultiWordMatcher(int priority, String[] match, TokenType type, boolean ignoreCase) {
+            super(priority, type, false);
+            this.match = match;
+            this.ignoreCase = ignoreCase;
+        }
+
+        /**
+         * Matches the provided text against the internal array of words
+         *
+         * @param text the text to match
+         * @return if the text matched any of the words
+         */
+        @Override
+        public boolean match(String text) {
+            if(text == null) //Save some time
+                return false;
+
+            if(ignoreCase) {
+                for (String str : match) {
+                    if (str.equalsIgnoreCase(text))
+                        return true;
+                }
+            } else {
+                for (String str : match) {
+                    if (str.equals(text))
+                        return true;
+                }
+            }
+            return false;
         }
     }
 
