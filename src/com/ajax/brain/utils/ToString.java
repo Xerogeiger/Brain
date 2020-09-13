@@ -2,6 +2,8 @@ package com.ajax.brain.utils;
 
 /**
  * Used to convert objects to a string
+ *
+ * the normal toString method isn't always useful this interface isn't used for printing it's used for converting
  */
 @FunctionalInterface
 public interface ToString<T> {
