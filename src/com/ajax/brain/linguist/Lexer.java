@@ -52,6 +52,12 @@ public class Lexer implements Iterable<Token> {
      */
     private int bufferIndex;
 
+    /**
+     * Creates a lexer for the provided {@code String}
+     *
+     * @param text the {@code String} for the lexer
+     * @param matcherList the list of {@code Matcher}s to use for creating tokens
+     */
     public Lexer(String text, MatcherList matcherList) {
         this.whitespaceMatcher = Matcher.getWhitespaceMatcher();
         this.buffer = text.getBytes();
@@ -62,19 +68,52 @@ public class Lexer implements Iterable<Token> {
         this.bufferIndex = 0;
     }
 
+    /**
+     * Creates a {@code Lexer} from the provided {@code InputStream} and {@code MatcherList}
+     *
+     * @param inputStream the {@code InputStream} to read data from
+     * @param matcherList the list of {@code Matcher}s to use for creating tokens
+     */
     public Lexer(InputStream inputStream, MatcherList matcherList) {
         this(inputStream, Matcher.getWhitespaceMatcher(), matcherList, 1000);
     }
 
+    /**
+     * Creates a {@code Lexer} from the provided {@code File} and {@code MatcherList}
+     *
+     * @param file the file to read from
+     * @param matcherList the list of {@code Matcher}s to use for creating tokens
+     * @throws FileNotFoundException if the file provided does not exist
+     */
     public Lexer(File file, MatcherList matcherList) throws FileNotFoundException {
         this(new FileInputStream(file), Matcher.getWhitespaceMatcher(), matcherList, 1000);
     }
 
+    /**
+     * Creates a {@code Lexer} from the provided {@code File}, {@code MatcherList}, and buffer size
+     *
+     * @param inputStream the {@code InputStream} to read data from
+     * @param matcherList the list of {@code Matcher}s to use for creating tokens
+     * @param bufferSize the size to make the data buffer
+     */
     public Lexer(InputStream inputStream, MatcherList matcherList, int bufferSize) {
         this(inputStream, Matcher.getWhitespaceMatcher(), matcherList, bufferSize);
     }
 
+    /**
+     * Creates a {@code Lexer} from the provided {@code File}, {@code MatcherList}, whitespace {@code Matcher}, and buffer size
+     * The whitespace {@code Matcher} is a {@code Matcher} used for determining the end of relevant word tokens and ignoring certain characters
+     *
+     * @param inputStream the {@code InputStream} to read the data from
+     * @param whitespaceMatcher the {@code Matcher} to use for matching whitespace
+     * @param matcherList the list of {@code Matcher}s to use for creating tokens
+     * @param bufferSize the size to make the data buffer
+     * @throws IllegalArgumentException is the whitespace {@code Matcher} is not a character {@code Matcher}
+     */
     public Lexer(InputStream inputStream, Matcher whitespaceMatcher, MatcherList matcherList, int bufferSize) {
+        if(!whitespaceMatcher.isCharacterMatch())
+            throw new IllegalArgumentException("The whitespace matcher should match characters");
+
         this.matchers = matcherList;
         this.inputStream = inputStream;
         this.buffer = new byte[bufferSize];
@@ -133,7 +172,7 @@ public class Lexer implements Iterable<Token> {
             if(whitespaceMatcher.match(value)) {
                 createWordToken(wordBuffer, wbIndex);
                 wbIndex = 0;
-                continue MainLoop;
+                continue;
             }
 
             wordBuffer[wbIndex++] = b;
@@ -142,6 +181,12 @@ public class Lexer implements Iterable<Token> {
         createWordToken(wordBuffer, wbIndex); //Make sure that no words are left behind
     }
 
+    /**
+     * Creates a token based on the provided buffer using the sored matchers
+     *
+     * @param buffer the buffer holding the word
+     * @param len the length of the word in the buffer
+     */
     private void createWordToken(byte[] buffer, int len) {
         if(len != 0) {
             String value = new String(buffer, 0, len);
@@ -165,6 +210,7 @@ public class Lexer implements Iterable<Token> {
 
     /**
      * Reads the next byte in the buffer
+     *
      * @return the next byte in the buffer
      */
     private byte nextByte() {
@@ -173,24 +219,22 @@ public class Lexer implements Iterable<Token> {
 
     /**
      * Refills the buffer with new data from the {@code InputStream}
-     * @return {@code true} if any data was read in
+     *
      * @throws IOException see {@link java.io.InputStream#read(byte[])}
      *
      * @see java.io.InputStream#read(byte[])
      */
-    private boolean readMore() throws IOException {
+    private void readMore() throws IOException {
         if(inputStream != null) {
             try {
                 int bytesRead = inputStream.read(buffer);
                 if(bytesRead != -1) {
                     bufferIndex = 0;
-                    return true;
                 }
             } catch (EOFException ignored) {
             }
         }
         bufferIndex = -1;
-        return false;
     }
 
     public class LexerIterator implements Iterator<Token> {
