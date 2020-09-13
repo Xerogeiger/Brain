@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 /**
- * A class for Collection utilities missing from {@link java.util.Collections}
+ * A class for Collection utilities not in {@link java.util.Collections}
  */
 public final class CollectionUtils {
     /**
