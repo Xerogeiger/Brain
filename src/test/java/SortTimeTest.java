@@ -1,5 +1,3 @@
-package tests;
-
 import com.ajax.brain.utils.sorts.MergeSort;
 import com.ajax.brain.utils.sorts.QuickSort;
 import com.ajax.brain.utils.sorts.Representor;

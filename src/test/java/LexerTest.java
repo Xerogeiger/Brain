@@ -1,5 +1,3 @@
-package tests;
-
 import com.ajax.brain.linguist.*;
 import com.ajax.brain.linguist.en.EnglishMatchers;
 import org.junit.Test;
@@ -14,7 +12,7 @@ public class LexerTest {
         matchers.add(Matcher.getSimpleMatcher("TEST", 1, TokenType.TEST, false));
         matchers.addAll(EnglishMatchers.getDefaultInstance().getMatchers());
 
-        Lexer lexer = new Lexer("TEST word yet Test 123, apple, orange, and grape", matchers);
+        Lexer lexer = new Lexer("If I had to choose 1 favorite fruit it would be either apples or oranges.", matchers);
 
         try {
             lexer.lex();

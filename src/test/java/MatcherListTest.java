@@ -1,5 +1,3 @@
-package tests;
-
 import com.ajax.brain.linguist.Matcher;
 import com.ajax.brain.linguist.MatcherList;
 import com.ajax.brain.linguist.TokenType;

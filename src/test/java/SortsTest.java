@@ -1,5 +1,3 @@
-package tests;
-
 import com.ajax.brain.utils.UnsortedArrayException;
 import com.ajax.brain.utils.sorts.*;
 import org.junit.jupiter.api.Test;

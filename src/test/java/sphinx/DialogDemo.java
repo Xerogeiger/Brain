@@ -1,14 +1,8 @@
-package tests.sphinx;
+package sphinx;
 
 import edu.cmu.sphinx.api.Configuration;
 import edu.cmu.sphinx.api.LiveSpeechRecognizer;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLStreamHandler;
-import java.net.URLStreamHandlerFactory;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,7 +18,7 @@ public class DialogDemo {
             "edu/cmu/sphinx/demo/dialog/weather.lm";
 
     private static final Map<String, Integer> DIGITS =
-            new HashMap<String, Integer>();
+            new HashMap<>();
 
     static {
         DIGITS.put("oh", 0);
