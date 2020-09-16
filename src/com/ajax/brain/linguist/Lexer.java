@@ -1,6 +1,7 @@
 package com.ajax.brain.linguist;
 
 import java.io.*;
+import java.net.SocketTimeoutException;
 import java.util.*;
 
 /**
@@ -231,7 +232,7 @@ public class Lexer implements Iterable<Token> {
                 if(bytesRead != -1) {
                     bufferIndex = 0;
                 }
-            } catch (EOFException ignored) {
+            } catch (EOFException | SocketTimeoutException ignored) {
             }
         }
         bufferIndex = -1;
