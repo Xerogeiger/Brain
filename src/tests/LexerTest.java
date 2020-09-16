@@ -14,7 +14,7 @@ public class LexerTest {
         matchers.add(Matcher.getSimpleMatcher("TEST", 1, TokenType.TEST, false));
         matchers.addAll(EnglishMatchers.getDefaultInstance().getMatchers());
 
-        Lexer lexer = new Lexer("TEST word yet Test", matchers);
+        Lexer lexer = new Lexer("TEST word yet Test 123, apple, orange, and grape", matchers);
 
         try {
             lexer.lex();
